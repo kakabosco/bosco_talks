@@ -18,3 +18,36 @@ AOS.init({
     mirror: false, // whether elements should animate out while scrolling past them
     anchorPlacement: "top-bottom", // defines which position of the element regarding to window should trigger the animation
 });
+
+const eventDate = new Date("Aug 20, 2023 20:00:00");
+const eventTimeStamp = eventDate.getTime();
+
+const dateCount = setInterval(function () {
+    const now = new Date();
+    const currentTimeStamp = now.getTime();
+
+    const eventDistance = eventTimeStamp - currentTimeStamp;
+
+    const daysInMs = 1000 * 60 * 60 * 24;
+    const hoursInMs = 1000 * 60 * 60;
+    const minutesInMs = 1000 * 60;
+    const secondsInMs = 1000;
+
+    const daysUntilEvent = Math.floor(eventDistance / daysInMs);
+    const hoursUntilEvent = Math.floor((eventDistance % daysInMs) / hoursInMs); // % = resto da divisão
+    const minutesUntilEvent = Math.floor(
+        (eventDistance % hoursInMs) / minutesInMs
+    );
+    const secondsUntilEvent = Math.floor(
+        (eventDistance % minutesInMs) / secondsInMs
+    );
+
+    document.getElementById(
+        "counter"
+    ).innerHTML = `${daysUntilEvent}d ${hoursUntilEvent}h ${minutesUntilEvent}m ${secondsUntilEvent}s`;
+
+    if (eventDistance < 0) {
+        clearInterval(dateCount);
+        document.getElementById("hero__text").innerHTML = "O evento já começou! Fique por dentro para os próximos.";
+    }
+}, 1000);
