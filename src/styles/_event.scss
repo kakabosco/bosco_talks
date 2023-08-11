@@ -60,6 +60,12 @@
     }
 
     @media (max-width: 640px) {
+        padding: 30px 0;
+
+        &--front-end {
+            padding-top: 60px;
+        }
+
         .container {
             display: block;
         }
